@@ -1,0 +1,4 @@
+(executable
+ (public_name ccwc)
+ (name main)
+ (libraries ccwc unix str))
