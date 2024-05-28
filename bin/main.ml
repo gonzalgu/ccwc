@@ -31,30 +31,25 @@ let count_words filename =
     in
     count 0
 
-    (*
-let count_words filename =
-  let in_channel = open_in filename in
-  let rec count acc = 
-    try
-      let l = input_line in_channel in
-      let wc = 
-        l 
-        |> String.split_on_char ' '
-        |> List.filter (fun s -> s <> "")
-        |> List.length
-      in count(wc + acc)
-    with 
-    | End_of_file -> close_in in_channel;
-    acc
-  in 
-  count 0
-*)
-
+let count_characters (filename : string) : int =
+  let ic = open_in filename in
+  let chars = ref 0 in
+    try      
+      while true do
+        ignore (input_char ic);
+        incr chars
+      done;
+      !chars
+    with
+    | End_of_file -> close_in ic; !chars
+    | e -> close_in ic; raise e    
+      
 let process_command cmd filename = 
   match cmd with 
   | "-c"  ->  file_size filename
   | "-l" -> count_lines filename
   | "-w" -> count_words filename
+  | "-m" -> count_characters filename
   | _ -> -1
 
 
