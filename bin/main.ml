@@ -54,6 +54,7 @@ let process_command cmd filename =
 
 
 let () = 
+  
   let c = Sys.argv.(1) in
   let f = Sys.argv.(2) in
   Printf.printf "%d %s\n" (process_command c f) f
